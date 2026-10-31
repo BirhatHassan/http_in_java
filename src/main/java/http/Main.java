@@ -12,9 +12,10 @@ public class Main {
 					BufferedReader input = new BufferedReader(
 							new InputStreamReader(client.getInputStream())
 					);
-//					BufferedWriter output = new BufferedWriter(
-//							new OutputStreamWriter(new OutputStreamWriter(client.getOutputStream()))
-//					);
+
+					BufferedWriter output = new BufferedWriter(
+							new OutputStreamWriter(client.getOutputStream())
+					);
 
 					String line = input.readLine();
 
@@ -23,6 +24,15 @@ public class Main {
 						line = input.readLine();
 					}
 
+					String body = "Hello World!";
+
+					output.write("HTTP/1.1 200 OK\r\n");
+					output.write("Content-Type: text/plain\r\n");
+					output.write("Content-Length: " + body.length() + "\r\n");
+					output.write("\r\n");
+					output.write(body);
+
+					output.flush();
 				}
 			}
 		}
